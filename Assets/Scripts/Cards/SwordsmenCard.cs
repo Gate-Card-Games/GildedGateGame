@@ -4,13 +4,22 @@ using UnityEngine.UI;
 public class SwordsmenCard : MonoBehaviour, ICardBase, IDefensiveCard
 {
 
+
+
+
     private int cost = 0;
 
-    private string name = "Swordsmen";
+    private string cardName = "Swordsmen";
 
-    [SerializeField] Button cardDisplay;
+    [SerializeField] GameObject cardDisplay;
 
+    [SerializeField] GameObject cardTower;
     private string rarity = "Common";
+
+    public bool isDefensiveCard()
+    {
+        return true;
+    }
 
     //Gets the cost of the card
     public int getCost()
@@ -21,11 +30,11 @@ public class SwordsmenCard : MonoBehaviour, ICardBase, IDefensiveCard
     //Gets the name of the card
     public string getName()
     {
-        return name;
+        return cardName;
     }
 
     // gets the prefab of the card object
-    public Button getCardDisplay()
+    public GameObject getCardDisplay()
     {
         return cardDisplay;
     }
@@ -43,5 +52,5 @@ public class SwordsmenCard : MonoBehaviour, ICardBase, IDefensiveCard
     public void activate() { return; }//IMPLEMENT LATER
 
     //Places the tower
-    public void activate(int x, int y) { return; }//IMPLEMENT LATER
+    public GameObject place() { return cardTower; }
 }

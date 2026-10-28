@@ -42,6 +42,16 @@ public class Deck : MonoBehaviour
         return maxDeckSize; 
     }
 
+    //THIS FUNCTION IS TO RESET THE DECK COMPLELTY DELETE WHEN GAME IS WORKING
+    public void DEBUG_RESET_COMMAND()
+    {
+        ICardBase[] newDeck = new ICardBase[80];
+        for(int i = 0; i < 30; i++)
+        {
+            newDeck[i] = debugCard;
+        }
+        changeDeck(newDeck, 30);
+    }
 
 
     //changes the max deck size to the new desired size
@@ -60,6 +70,7 @@ public class Deck : MonoBehaviour
     public void changeDeck(ICardBase[] newDeck, int newDeckSize)
     {
         deck = newDeck; 
+        maxDeckSize = deck.Length;
         deckSize = newDeckSize;
     }
 
@@ -115,7 +126,7 @@ public class Deck : MonoBehaviour
     //draws a random card
     public ICardBase draw()
     {
-        if(drawnCards.Count() == deckSize)
+        if(drawnCards.Count() >= deckSize)
         {
             return null;
         }

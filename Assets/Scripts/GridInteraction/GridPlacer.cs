@@ -9,6 +9,10 @@ public class GridPlacer : MonoBehaviour
     public Grid grid;
     public LayerMask placementLayer;
 
+    [SerializeField] DislpayHand dHand;
+
+    [SerializeField] Hand hand;
+
     private HashSet<Vector3> occupiedPosition = new HashSet<Vector3>();
 
 
@@ -30,11 +34,26 @@ public class GridPlacer : MonoBehaviour
             title.position = snappedWorldPos;
             if (Input.GetMouseButtonDown(0))
             {
-                if (!occupiedPosition.Contains(title.position))
+                // Sees if the card is defensive and then plays it
+                if (dHand != null)
                 {
-                    var work = Instantiate(boxTest, title.position, Quaternion.identity);
-                    occupiedPosition.Add(work.transform.position);
+                    var t = hand.playCard(dHand.getCardOn());
+
+                    if (t != null)
+                    {
+                        GameObject card = t as GameObject;
+
+                        if (!occupiedPosition.Contains(title.position))
+                        {
+                            var work = Instantiate(card, title.position, Quaternion.identity);
+                            occupiedPosition.Add(work.transform.position);
+                            dHand.setCardOn(-1);
+                            dHand.displayAll();
+                        }
+
+                    }
                 }
+                
 
             }
         }

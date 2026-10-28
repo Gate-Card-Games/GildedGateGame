@@ -23,6 +23,15 @@ public class Hand : MonoBehaviour
         hand = new ICardBase[handSize];
     }
 
+    public void setHand()
+    {
+        for(int i = 0; i < handSize; i++)
+        {
+            hand[i] = deck.draw();
+        }
+        
+    }
+
     //returns the size of the hand
     public int getHandSize()
     {
@@ -35,21 +44,34 @@ public class Hand : MonoBehaviour
     }
 
     //When you play a card from you hand removes and replaces it
-    public void playCard(int slot)
+    public GameObject playCard(int slot)
     {
-        if(slot >= currentHandSize)
+        if (slot >= currentHandSize)
         {
             throw new ArgumentOutOfRangeException("That slot is greater than the number of cards in the hand"); // propogates an exception so we can track if there is an error
         }
+        else if (slot < 0)
+        {
+            throw new ArgumentOutOfRangeException("That slot is lower than the minimuim slot that could be given"); // propogates an exception so we can track if there is an error
+        }
 
         ICardBase card = hand[slot];
-        card.activate();
-        card = deck.draw();
+        
+        
         for (int i = slot; i < handSize - 2; i++)
         {
             hand[i] = hand[i + 1];
         }
-        hand[handSize] = card;
+        hand[handSize-1] = deck.draw();
+        if (card.isDefensiveCard())
+        {
+            return ((IDefensiveCard)card).place();
+        }
+        else
+        {
+            card.activate();
+        }
+        return null;
 
     }
 

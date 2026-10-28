@@ -6,9 +6,10 @@
     collaborators n\a
  */
 
+using UnityEngine;
+
 public interface IDefensiveCard
 {
     //Places the tower
-    public void activate(int x, int y);
-
+    public GameObject place();
 }
