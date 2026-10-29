@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 using static Unity.Burst.Intrinsics.X86.Avx;
 
 public class DislpayHand : MonoBehaviour
@@ -27,9 +28,22 @@ public class DislpayHand : MonoBehaviour
 
     public void removeCardOn()
     {
-        if(cardArr.Length <= cardCurrentlyOn || cardCurrentlyOn < 0)
+        if(!(cardArr.Length <= cardCurrentlyOn || cardCurrentlyOn < 0))
         {
-            Destroy(cardArr[cardCurrentlyOn]);
+            int size = cardArr.Length - 1;
+            Object.DestroyImmediate(cardArr[cardCurrentlyOn], true); // Destroys the played card
+            for(int i = cardCurrentlyOn; i < size; i++) // shifts all of the other cards down one
+            {
+                cardArr[i] = cardArr[i + 1];
+                PositionInHand posInHand = cardArr[i].GetComponent<PositionInHand>();
+                posInHand.changePositionInHand(i);
+                //I Also Need To Add Positions For The Cards Based On The Screen Size Later
+            }
+            GameObject card = playerHand.getItem(size).getCardDisplay();
+            var newCard = Instantiate(card, new Vector3(-6.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
+            PositionInHand newPos = newCard.GetComponent<PositionInHand>();
+            newPos.changePositionInHand(size);
+            cardArr[size] = card;
         }
     }
     private void display()
@@ -53,7 +67,7 @@ public class DislpayHand : MonoBehaviour
             cardArr[i] = card;
             
         }
-        Debug.Log(size);
+
     }
 
 

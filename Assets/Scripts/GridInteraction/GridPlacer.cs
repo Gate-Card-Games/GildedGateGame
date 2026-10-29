@@ -47,8 +47,9 @@ public class GridPlacer : MonoBehaviour
                         {
                             var work = Instantiate(card, title.position, Quaternion.identity);
                             occupiedPosition.Add(work.transform.position);
+                            //dHand.removeCardOn();
                             dHand.setCardOn(-1);
-                            dHand.displayAll();
+                            
                         }
 
                     }

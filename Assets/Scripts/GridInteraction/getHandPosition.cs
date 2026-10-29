@@ -17,9 +17,7 @@ public class getHandPosition : MonoBehaviour
             {
                 PositionInHand posInHand = hit.transform.gameObject.GetComponent<PositionInHand>();
                 hand.setCardOn(posInHand.getPositionInHand());
-                Debug.Log(hand.getCardOn());
             }
-            Debug.Log("Hello");
         }
     }
 
