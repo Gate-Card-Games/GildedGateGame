@@ -9,4 +9,6 @@ public interface IEnemyBase
     public float getDistToEnd();
 
     public void move();
+
+    public int Compare(IEnemyBase a, IEnemyBase b);
 }

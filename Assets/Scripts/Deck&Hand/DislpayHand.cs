@@ -48,7 +48,7 @@ public class DislpayHand : MonoBehaviour
             }
             else
             {
-                var newCard = Instantiate(card, new Vector3(-6.0f, 0.0f, 0.0f), card.transform.rotation) as GameObject;
+                var newCard = makeCard(card);
                 PositionInHand newPos = newCard.GetComponent<PositionInHand>();
                 newPos.changePositionInHand(size);
                 cardArr[size] = newCard;
@@ -70,13 +70,18 @@ public class DislpayHand : MonoBehaviour
         for (int i = 0; i < size; i++)
         {
             GameObject card = playerHand.getItem(i).getCardDisplay();
-            var newCard = Instantiate(card, new Vector3(-6.0f,0.0f,0.0f), card.transform.rotation) as GameObject;
+            var newCard = makeCard(card);
             PositionInHand posInHand = newCard.GetComponent<PositionInHand>();
             posInHand.changePositionInHand(i);
             cardArr.Add(newCard);
             
         }
 
+    }
+
+    private GameObject makeCard(GameObject card)
+    {
+        return Instantiate(card, new Vector3(-6.0f, 0.0f, 0.0f), card.transform.rotation) as GameObject;
     }
 
 
