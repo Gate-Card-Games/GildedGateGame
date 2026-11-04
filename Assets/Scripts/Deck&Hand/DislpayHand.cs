@@ -51,7 +51,7 @@ public class DislpayHand : MonoBehaviour
                 var newCard = Instantiate(card, new Vector3(-6.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
                 PositionInHand newPos = newCard.GetComponent<PositionInHand>();
                 newPos.changePositionInHand(size);
-                cardArr[size] = card;
+                cardArr[size] = newCard;
             }
         }
     }
