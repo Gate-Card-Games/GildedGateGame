@@ -23,6 +23,14 @@ public class Hand : MonoBehaviour
         hand = new ICardBase[handSize];
     }
 
+    public void changeHandSize(int newSize)
+    {
+        handSize = newSize;
+        hand = new ICardBase[handSize];
+        deck.shuffle();
+        setHand();
+    }
+
     public void setHand()
     {
         for(int i = 0; i < handSize; i++)

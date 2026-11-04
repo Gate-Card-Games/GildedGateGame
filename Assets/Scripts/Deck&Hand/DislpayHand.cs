@@ -2,6 +2,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -14,7 +15,7 @@ public class DislpayHand : MonoBehaviour
     //The card that the player is currently on
     private int cardCurrentlyOn = -1;
 
-    private GameObject[] cardArr;
+    private List<GameObject> cardArr;
 
     public void setCardOn(int newCard)
     {
@@ -26,24 +27,32 @@ public class DislpayHand : MonoBehaviour
         return cardCurrentlyOn; 
     }
 
-    public void removeCardOn()
+    public void removeCardOn() //WTF AM I DOING WRONG
     {
-        if(!(cardArr.Length <= cardCurrentlyOn || cardCurrentlyOn < 0))
+        if(!(cardArr.Count() <= cardCurrentlyOn || cardCurrentlyOn < 0))
         {
-            int size = cardArr.Length - 1;
-            Object.DestroyImmediate(cardArr[cardCurrentlyOn], true); // Destroys the played card
+            int size = cardArr.Count() - 1;
+            GameObject obj = cardArr[cardCurrentlyOn];
+            Destroy(obj);
             for(int i = cardCurrentlyOn; i < size; i++) // shifts all of the other cards down one
             {
-                cardArr[i] = cardArr[i + 1];
+                //cardArr[i] = cardArr[i + 1];
                 PositionInHand posInHand = cardArr[i].GetComponent<PositionInHand>();
                 posInHand.changePositionInHand(i);
                 //I Also Need To Add Positions For The Cards Based On The Screen Size Later
             }
             GameObject card = playerHand.getItem(size).getCardDisplay();
-            var newCard = Instantiate(card, new Vector3(-6.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
-            PositionInHand newPos = newCard.GetComponent<PositionInHand>();
-            newPos.changePositionInHand(size);
-            cardArr[size] = card;
+            if (playerHand.getItem(size) == null)
+            {
+                cardArr.RemoveAt(size);
+            }
+            else
+            {
+                var newCard = Instantiate(card, new Vector3(-6.0f, 0.0f, 0.0f), Quaternion.identity) as GameObject;
+                PositionInHand newPos = newCard.GetComponent<PositionInHand>();
+                newPos.changePositionInHand(size);
+                cardArr[size] = card;
+            }
         }
     }
     private void display()
@@ -57,14 +66,14 @@ public class DislpayHand : MonoBehaviour
                 size--;
             }
         }
-        cardArr = new GameObject[size];
-        for(int i = 0; i < size; i++)
+        cardArr = new List<GameObject>();
+        for (int i = 0; i < size; i++)
         {
             GameObject card = playerHand.getItem(i).getCardDisplay();
             var newCard = Instantiate(card, new Vector3(-6.0f,0.0f,0.0f), Quaternion.identity) as GameObject;
             PositionInHand posInHand = newCard.GetComponent<PositionInHand>();
             posInHand.changePositionInHand(i);
-            cardArr[i] = card;
+            cardArr.Add(newCard);
             
         }
 
