@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 45497661}
   - component: {fileID: 45497660}
   - component: {fileID: 45497659}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1046,7 +1046,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d890bb82bd77ae842b2031ad72b4a528, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Movement
-  speed: 5
+  speed: 7
+  jumpForce: 5
+  jumpCooldown: 0.25
+  airMult: 0.4
+  groundDrag: 5
+  playerHeight: 2
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
   orientation: {fileID: 1212023842}
 --- !u!54 &1834497236
 Rigidbody:
@@ -1073,7 +1081,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
