@@ -27,6 +27,10 @@ public class Deck : MonoBehaviour
 
     [SerializeField] SwordsmenCard debugCard;
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

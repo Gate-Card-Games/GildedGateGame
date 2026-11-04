@@ -15,6 +15,11 @@ public class Hand : MonoBehaviour
     private int currentHandSize;
     private ICardBase[] hand;
 
+    private void Awake()
+    {
+        deck = FindAnyObjectByType<Deck>();
+
+    }
     //Runs at the start of the program
     private void Start()
     {
