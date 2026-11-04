@@ -4,24 +4,33 @@ public abstract class TowerBase : MonoBehaviour
 {
     int attack;
 
-    int attackSpeed;
+    float attackSpeed;
 
     int range;
 
-    private void setAttack(int newAttack)
+    public void setAttack(int newAttack)
     {
         attack = newAttack;
     }
 
-    private void setAttackSpeed(int newAttackSpeed)
+    public void setAttackSpeed(float newAttackSpeed)
     {
-        int attackSpeed = newAttackSpeed;
+        attackSpeed = newAttackSpeed;
     }
 
-    private void setRange(int newRange)
+    public void setRange(int newRange)
     {
         range = newRange;
     }
 
-    public abstract void Attack();
+    public int getAttack()
+    {  return attack; }
+
+    public int getRange()
+    {  return range; }
+
+    public float getAttackSpeed()
+    {  return attackSpeed; }
+
+    public abstract void Attack(IEnemyBase enemy);
 }
