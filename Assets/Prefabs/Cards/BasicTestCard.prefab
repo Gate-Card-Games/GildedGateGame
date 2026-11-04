@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 134843973073731187}
   - component: {fileID: 3969692258685315851}
   - component: {fileID: 382100559510261418}
+  - component: {fileID: 1701937603727146739}
   m_Layer: 3
   m_Name: BasicTestCard
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,3 +126,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b9e63b5edef1404e9cd92dc6b9dfd26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PositionInHand
+--- !u!114 &1701937603727146739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2012250572051382231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46dcee6bc9ef4d247899ce339fc2c905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SwordsmenCard
+  cardDisplay: {fileID: 2012250572051382231}
+  cardTower: {fileID: 4250334139320468697, guid: 6648052c3dbfe4d48a73b157d242f1fb, type: 3}

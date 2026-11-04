@@ -23,4 +23,5 @@ public interface ICardBase
 
     //The card uses its ability or spell
     public void activate();
+
 }

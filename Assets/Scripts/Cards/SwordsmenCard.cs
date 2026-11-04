@@ -53,4 +53,6 @@ public class SwordsmenCard : MonoBehaviour, ICardBase, IDefensiveCard
 
     //Places the tower
     public GameObject place() { return cardTower; }
+
+
 }
