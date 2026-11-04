@@ -26,3 +26,6 @@
 -----------------------------------------------------------
 # TEAM AGREEMENT
 Our team will use Trello (linked here:https://trello.com/b/fLj5G2ij/gpr-100-group-assignment) to keep track of our project progress, as well as communicate over IMessage in a Group Chat, Have a Merge rule of peer reviewing each commit, and have a weekly meeting of Monday at 2:30. If someone misses a task, we will have them finish it as soon as possible otherwise they will be forced to take on more work, and the other members of the team will pick up the slack.
+
+#PoC DEMO VIDEO
+https://drive.google.com/file/d/1eLLqlI0SceVFVEXbCTOwQW_UGmi7y4Eh/view?usp=drive_link
