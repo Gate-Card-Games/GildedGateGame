@@ -56,6 +56,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestCard
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fd86244fc0ce72811a343965328bb47a, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fd86244fc0ce72811a343965328bb47a, type: 3}
+      propertyPath: m_TagString
+      value: Card
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -65,7 +73,7 @@ PrefabInstance:
       addedObject: {fileID: 6267258374234094758}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: fd86244fc0ce72811a343965328bb47a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8734497436976663962}
+      addedObject: {fileID: 4231085561659913472}
   m_SourcePrefab: {fileID: 100100000, guid: fd86244fc0ce72811a343965328bb47a, type: 3}
 --- !u!1 &101721203945908360 stripped
 GameObject:
@@ -84,8 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b9e63b5edef1404e9cd92dc6b9dfd26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PositionInHand
---- !u!136 &8734497436976663962
-CapsuleCollider:
+--- !u!135 &4231085561659913472
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,8 +110,6 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Radius: 1.3978177
-  m_Height: 0.2335023
-  m_Direction: 1
   m_Center: {x: 0, y: 0.11675115, z: -0.5663482}
