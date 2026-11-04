@@ -16,7 +16,7 @@ public class Movement : MonoBehaviour
     public float playerHeight;
     public LayerMask groundLayer;
     bool grounded;
-
+    public bool stopMovement;
 
     private float horizontalInput;
     private float verticalInput;
@@ -26,6 +26,8 @@ public class Movement : MonoBehaviour
     public Transform orientation;
     private Rigidbody rb;
     private Vector3 moveDirection;
+
+    
     private void Awake()
     {
         rb  = GetComponent<Rigidbody>();
@@ -33,16 +35,19 @@ public class Movement : MonoBehaviour
     }
     private void Update()
     {
-
+        if (!stopMovement)
+        {
+            InputFunc();
+        }
         GroundCheck();
-        InputFunc();
         SpeedControl();
         
        
     }
     private void FixedUpdate()
     {
-        MoveCharacter();
+        if(!stopMovement)
+            MoveCharacter();
     }
     void InputFunc()
     {
