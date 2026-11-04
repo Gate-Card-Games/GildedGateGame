@@ -34,10 +34,9 @@ public class DislpayHand : MonoBehaviour
             int size = cardArr.Count() - 1;
             GameObject obj = cardArr[cardCurrentlyOn];
             Destroy(obj);
-            //DestroyImmediate(obj, true); // Destroys the played card
             for(int i = cardCurrentlyOn; i < size; i++) // shifts all of the other cards down one
             {
-                cardArr[i] = cardArr[i + 1];
+                //cardArr[i] = cardArr[i + 1];
                 PositionInHand posInHand = cardArr[i].GetComponent<PositionInHand>();
                 posInHand.changePositionInHand(i);
                 //I Also Need To Add Positions For The Cards Based On The Screen Size Later
@@ -74,7 +73,7 @@ public class DislpayHand : MonoBehaviour
             var newCard = Instantiate(card, new Vector3(-6.0f,0.0f,0.0f), Quaternion.identity) as GameObject;
             PositionInHand posInHand = newCard.GetComponent<PositionInHand>();
             posInHand.changePositionInHand(i);
-            cardArr.Add(card);
+            cardArr.Add(newCard);
             
         }
 
