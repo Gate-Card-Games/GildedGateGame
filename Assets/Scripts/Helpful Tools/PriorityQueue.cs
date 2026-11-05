@@ -201,4 +201,27 @@ public class PriorityQueue<T> where T : IComparable<T>
             elementNodes = tempArr;
         }
     }
+
+    /*Summary:
+     *      The purpose of this function is to see if an element is currently in the Priority Queue
+     * Sadly its O(n)
+     * 
+     * Parameters:
+     *      element:
+     *          The element you wan to see if its in the Priority Queue
+     *          
+     * Returns:
+     *      It returns true if the element is in the priority queue or false if not
+     * 
+     */
+    public bool Contains(T element)
+    {
+        foreach(T ele in elementNodes)
+        {
+            if(ele.Equals(element)) 
+                return true;
+        }
+        return false;
+    }
+
 }

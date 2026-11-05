@@ -1,12 +1,13 @@
 using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
 //using DotNetty.Common.Utilities;
 
 public class SwordsmenTower : TowerBase
 {
+    private PriorityQueue<IEnemyBase> enemiesInRange = new PriorityQueue<IEnemyBase>(); 
     private IEnemyBase targetedEnemy;
-    //private PriorityQueue<int> enemiesInRange;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,11 +29,18 @@ public class SwordsmenTower : TowerBase
 
     public bool addEnemyToList(IEnemyBase enemy)
     {
-
+        if(enemiesInRange.Contains(enemy))
+            return false;
+        if (isEnemyInRange(enemy))
+        {
+            enemiesInRange.add(enemy);
+            return true;
+        }
         return false;
     }
     private bool isEnemyInRange(IEnemyBase enemy)
     {
+        
         return false;
     }
 }
