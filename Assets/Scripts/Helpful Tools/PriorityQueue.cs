@@ -38,13 +38,13 @@ public class PriorityQueue<T> where T : IComparable<T>
         int currentSpot = size - 1;
         elementNodes[currentSpot] = newElement;
         int parentSpot = (currentSpot - 1) / 2;
-        while (parentSpot >= 0 && elementNodes[currentSpot].CompareTo(elementNodes[parentSpot]) < 0) // Holy shit im stupid (I tried to declare the parameters instead of putting the variable in) 
+        //Runs if it should swap or if the parent is the default value
+        while (parentSpot >= 0 && (elementNodes[currentSpot].CompareTo(elementNodes[parentSpot]) < 0 || elementNodes[parentSpot].CompareTo(default(T)) == 0)) // Holy shit im stupid (I tried to declare the parameters instead of putting the variable in) 
         {
             swap(currentSpot, parentSpot);
             currentSpot = parentSpot;
             parentSpot = (currentSpot - 1) / 2;
         }
-        size++;
     }
 
     /*Summary:
@@ -84,7 +84,11 @@ public class PriorityQueue<T> where T : IComparable<T>
         {
             int rightChild = (currentElement * 2) + 2; // Gets and stores the right child
             int leftChild = (currentElement * 2) + 1; // Gets and stores the left child
-            if (!(elementNodes[leftChild] == null) && !(elementNodes[rightChild] == null))
+            if(leftChild >= size || elementNodes[leftChild].CompareTo(default(T)) == 0)
+            {
+                break; // exits because both children are out of the array
+            }
+            if (!(elementNodes[leftChild].CompareTo(default(T)) == 0) && !(elementNodes[rightChild].CompareTo(default(T)) == 0))
             {
                 int checkLeft = elementNodes[leftChild].CompareTo(elementNodes[currentElement]);
                 int checkRight = elementNodes[rightChild].CompareTo(elementNodes[currentElement]);
@@ -117,7 +121,7 @@ public class PriorityQueue<T> where T : IComparable<T>
                     break; // Exits the loop if the element is properly placed
                 }
             }
-            else if (!(elementNodes[leftChild] == null))
+            else if (!(elementNodes[leftChild].CompareTo(default(T)) == 0))
             {
                 int checkLeft = elementNodes[leftChild].CompareTo(elementNodes[currentElement]);
                 if (checkLeft < 0) // changes the current elemet to the left child
@@ -130,7 +134,7 @@ public class PriorityQueue<T> where T : IComparable<T>
                     break; // Exits the loop if the element is properly placed
                 }
             }
-            else if (!(elementNodes[rightChild] == null))
+            else if (!(elementNodes[rightChild].CompareTo(default(T)) == 0))
             {
                int checkRight = elementNodes[rightChild].CompareTo(elementNodes[currentElement]);
                if (checkRight < 0) // changes the current elemet to the right child
@@ -144,7 +148,7 @@ public class PriorityQueue<T> where T : IComparable<T>
                }
             }
 
-        } while (false);
+        } while (true); //Relized I forgot to change this to always run
         size--;
         return returnElement;
     }
@@ -178,7 +182,7 @@ public class PriorityQueue<T> where T : IComparable<T>
         if (size >= elementNodes.Length)
         {
             T[] tempArr = new T[size * 2];
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < size - 1; i++)
             {
                 tempArr[i] = elementNodes[i];
             }
