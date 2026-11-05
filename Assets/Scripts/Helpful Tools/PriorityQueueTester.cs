@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class PriorityQueueTester : MonoBehaviour
 {
@@ -6,9 +7,12 @@ public class PriorityQueueTester : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        for(int i = 1; i <= 100; i++)
+        System.Random rand = new System.Random();
+        for(int i = 1; i <= 1024; i++)
         {
-            test.add(i);
+            int num = rand.Next(1, 100) + 1;
+            Debug.Log(num);
+            test.add(num);
         }
 
         while(test.peek() != 0)
