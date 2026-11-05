@@ -1,6 +1,8 @@
 /*I got bored so I wanted to make a new array based Priority Queue so I have control over it
  * 
- * The purpose of this function is to order any number of 
+ * The purpose of this function is to order any number of things in a data type
+ * 
+ * Also please try to avoid using the things default type because it will always be shoved to the bottom
  * 
  * @author Ryan Weinstein
  * 
