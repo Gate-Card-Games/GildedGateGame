@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class TowerBase : MonoBehaviour
@@ -24,13 +25,13 @@ public abstract class TowerBase : MonoBehaviour
     }
 
     public int getAttack()
-    {  return attack; }
+    { return attack; }
 
     public int getRange()
-    {  return range; }
+    { return range; }
 
     public float getAttackSpeed()
-    {  return attackSpeed; }
+    { return attackSpeed; }
 
     public abstract void Attack(IEnemyBase enemy);
 }

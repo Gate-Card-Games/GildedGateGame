@@ -1,6 +1,7 @@
+using System;
 using UnityEngine;
 
-public interface IEnemyBase
+public interface IEnemyBase : IComparable<IEnemyBase>
 {
     public int getHealth();
 
@@ -10,5 +11,5 @@ public interface IEnemyBase
 
     public void move();
 
-    public int Compare(IEnemyBase a, IEnemyBase b);
+    public int CompareTo(IEnemyBase otherObject);
 }
