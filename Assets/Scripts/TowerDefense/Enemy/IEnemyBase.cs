@@ -10,6 +10,9 @@ public interface IEnemyBase : IComparable<IEnemyBase>
     public float getDistToEnd();
 
     public void move();
+
+    public float getDistToObj(float objX, float objY);
+    
     
     //You need to implement a public int CompareTo(IEnemyBase otherObject);
 }

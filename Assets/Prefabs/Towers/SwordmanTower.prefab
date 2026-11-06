@@ -59,6 +59,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e74a570ae76b7e8489a1d11e879a4d73, type: 3}
       insertIndex: -1
       addedObject: {fileID: -7788796808892591373}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e74a570ae76b7e8489a1d11e879a4d73, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1707730157390813387}
   m_SourcePrefab: {fileID: 100100000, guid: e74a570ae76b7e8489a1d11e879a4d73, type: 3}
 --- !u!1 &5402368090377166067 stripped
 GameObject:
@@ -86,3 +89,15 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1707730157390813387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5402368090377166067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1537af5dcd73dbc46a5a4c024d31c799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SwordsmenTower

@@ -22,6 +22,9 @@ public class PriorityQueue<T> where T : IComparable<T>
 
     private int size = 0;
 
+
+
+
     /*Summary:
      *      adds an element to the array and then puts it in its place based on the priority
      * 
@@ -75,82 +78,14 @@ public class PriorityQueue<T> where T : IComparable<T>
     {
         if(size <= 0)
         {
-            throw new IndexOutOfRangeException("The PriorityQueue Is Empty");
+           return default(T);
         }
         T returnElement = elementNodes[0];
         elementNodes[0] = elementNodes[size - 1];
         elementNodes[size - 1] = default(T);
         int currentElement = 0;
         // Loops until the element is in the proper place
-        do
-        {
-            int rightChild = (currentElement * 2) + 2; // Gets and stores the right child
-            int leftChild = (currentElement * 2) + 1; // Gets and stores the left child
-            if(leftChild >= size || elementNodes[leftChild].CompareTo(default(T)) == 0)
-            {
-                break; // exits because both children are out of the array
-            }
-            if (!(elementNodes[leftChild].CompareTo(default(T)) == 0) && !(elementNodes[rightChild].CompareTo(default(T)) == 0))
-            {
-                int checkLeft = elementNodes[leftChild].CompareTo(elementNodes[currentElement]);
-                int checkRight = elementNodes[rightChild].CompareTo(elementNodes[currentElement]);
-                if(checkLeft < 0 && checkRight < 0) // if both elements can be used to shift
-                {
-                    int check = elementNodes[leftChild].CompareTo(elementNodes[rightChild]);
-                    if(check > 0)
-                    {
-                        swap(currentElement, rightChild);
-                        currentElement = rightChild;
-                    }
-                    else
-                    {
-                        swap(currentElement, leftChild);
-                        currentElement = leftChild;
-                    }
-                }
-                else if(checkLeft < 0) // changes the current elemet to the left child
-                {
-                    swap(currentElement, leftChild);
-                    currentElement = leftChild;
-                }
-                else if (checkRight < 0) // changes the current element to the right child
-                {
-                    swap(currentElement, rightChild);
-                    currentElement = rightChild;
-                }
-                else
-                {
-                    break; // Exits the loop if the element is properly placed
-                }
-            }
-            else if (!(elementNodes[leftChild].CompareTo(default(T)) == 0))
-            {
-                int checkLeft = elementNodes[leftChild].CompareTo(elementNodes[currentElement]);
-                if (checkLeft < 0) // changes the current elemet to the left child
-                {
-                    swap(currentElement, leftChild);
-                    currentElement = leftChild;
-                }
-                else
-                {
-                    break; // Exits the loop if the element is properly placed
-                }
-            }
-            else if (!(elementNodes[rightChild].CompareTo(default(T)) == 0))
-            {
-               int checkRight = elementNodes[rightChild].CompareTo(elementNodes[currentElement]);
-               if (checkRight < 0) // changes the current elemet to the right child
-               {
-                    swap(currentElement, leftChild);
-                    currentElement = leftChild;
-               }
-               else
-               {
-                    break; // Exits the loop if the element is properly placed
-               }
-            }
-
-        } while (true); //Relized I forgot to change this to always run
+        continueShift(currentElement);
         size--;
         return returnElement;
     }
@@ -222,6 +157,132 @@ public class PriorityQueue<T> where T : IComparable<T>
                 return true;
         }
         return false;
+    }
+
+    /*Summary
+     *      Remove an element from the desired spot
+     * 
+     * Parameters:
+     *      element:
+     *          the element you want out of the PriorityQueue
+     *          
+     *Return:
+     *      true if the element was removed false if it wasn't removed
+     * 
+     * 
+     */
+    public bool remove(T element)
+    {
+        for(int i = 0; i < size; i++)
+        {
+            if (elementNodes[i].CompareTo(element) == 0)
+            {
+                elementNodes[i] = elementNodes[size - 1];
+                elementNodes[size - 1] = default(T);
+                continueShift(i); // shifts the element to its proper place
+                size--;
+                resize();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*Summary:
+     *      its just the poll method except will throw an exception if the array is empty and returns a bool
+     * 
+     * Return:
+     *      if the element at the first slot was succefully removed from the array
+     */
+    public bool remove()
+    {
+        T item = poll();
+        if (item.CompareTo(default(T)) == 0)
+            throw new IndexOutOfRangeException("The array is currently empty");
+        return true;
+    }
+
+    /*Summary:
+     *      Shifts the element down until its in the proper place starting from the given element
+     * 
+     * Paramaters:
+     *      currentElement:
+     *          The index of the element you want shifted
+     * 
+     * Return:
+     *      always returns false
+     * 
+     */
+    private bool continueShift(int currentElement)
+    {
+        do
+        {
+            int rightChild = (currentElement * 2) + 2; // Gets and stores the right child
+            int leftChild = (currentElement * 2) + 1; // Gets and stores the left child
+            if (leftChild >= size || elementNodes[leftChild].CompareTo(default(T)) == 0)
+            {
+                return false; // exits because both children are out of the array
+            }
+            if (!(elementNodes[leftChild].CompareTo(default(T)) == 0) && !(elementNodes[rightChild].CompareTo(default(T)) == 0))
+            {
+                int checkLeft = elementNodes[leftChild].CompareTo(elementNodes[currentElement]);
+                int checkRight = elementNodes[rightChild].CompareTo(elementNodes[currentElement]);
+                if (checkLeft < 0 && checkRight < 0) // if both elements can be used to shift
+                {
+                    int check = elementNodes[leftChild].CompareTo(elementNodes[rightChild]);
+                    if (check > 0)
+                    {
+                        swap(currentElement, rightChild);
+                        currentElement = rightChild;
+                    }
+                    else
+                    {
+                        swap(currentElement, leftChild);
+                        currentElement = leftChild;
+                    }
+                }
+                else if (checkLeft < 0) // changes the current elemet to the left child
+                {
+                    swap(currentElement, leftChild);
+                    currentElement = leftChild;
+                }
+                else if (checkRight < 0) // changes the current element to the right child
+                {
+                    swap(currentElement, rightChild);
+                    currentElement = rightChild;
+                }
+                else
+                {
+                    return false; // Exits the loop if the element is properly placed
+                }
+            }
+            else if (!(elementNodes[leftChild].CompareTo(default(T)) == 0))
+            {
+                int checkLeft = elementNodes[leftChild].CompareTo(elementNodes[currentElement]);
+                if (checkLeft < 0) // changes the current elemet to the left child
+                {
+                    swap(currentElement, leftChild);
+                    currentElement = leftChild;
+                }
+                else
+                {
+                    return false; // Exits the loop if the element is properly placed
+                }
+            }
+            else if (!(elementNodes[rightChild].CompareTo(default(T)) == 0))
+            {
+                int checkRight = elementNodes[rightChild].CompareTo(elementNodes[currentElement]);
+                if (checkRight < 0) // changes the current elemet to the right child
+                {
+                    swap(currentElement, leftChild);
+                    currentElement = leftChild;
+                }
+                else
+                {
+                    return false; // Exits the loop if the element is properly placed
+                }
+            }
+        } while (true);
     }
 
 }
