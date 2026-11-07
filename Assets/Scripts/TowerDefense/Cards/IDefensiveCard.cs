@@ -10,6 +10,12 @@ using UnityEngine;
 
 public interface IDefensiveCard
 {
-    //Places the tower
+    /*Summary:
+     *      returns the tower side of this card
+     * 
+     * Return:
+     *      the prefab for the tower of this object
+     *      
+     */
     public GameObject place();
 }

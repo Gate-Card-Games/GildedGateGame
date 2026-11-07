@@ -62,8 +62,6 @@ public interface ICardBase
      *      
      *  Return:
      *      the value of the card in terms of 3-D world money
-     * 
-     * 
      */
     public int getValue();
 

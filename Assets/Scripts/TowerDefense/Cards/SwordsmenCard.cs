@@ -1,3 +1,9 @@
+/*The Purpose of this program is to be a logic center for the swordsmen card
+ * 
+ * @author ryan weinstein
+ * 
+ * Collaborators N\A
+ */
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,53 +11,103 @@ public class SwordsmenCard : MonoBehaviour, ICardBase, IDefensiveCard
 {
 
 
+    //instant variables
+
+    private const int cost = 1;
+
+    private const string cardName = "Swordsmen";
+
+    private const string rarity = "Common";
 
 
-    private int cost = 0;
-
-    private string cardName = "Swordsmen";
+    //Prefabs from the game
 
     [SerializeField] GameObject cardDisplay;
 
     [SerializeField] GameObject cardTower;
-    private string rarity = "Common";
+
+    /*Summary:
+     *      Returns if the card has a tower side
+     * Return:
+     *      if the tower is a defensive card with a tower
+     * 
+     */
 
     public bool isDefensiveCard()
     {
         return true;
     }
 
-    //Gets the cost of the card
+
+    /*Summary:
+     *      Returns whatever the cost of the card is
+     * 
+     * Return:
+     *      the cost of the card
+     * 
+     */
     public int getCost()
     {
         return cost;
     }
 
-    //Gets the name of the card
+    /*Summary:
+     *      returns the name of the card
+     *      
+     *  Return:
+     *      the name of the card
+     * 
+     * 
+     */
     public string getName()
     {
         return cardName;
     }
 
-    // gets the prefab of the card object
+    /*Summary:
+     *      get the prefab of the card object
+     * 
+     *Return:
+     *      the prefab of the card
+     * 
+     */
     public GameObject getCardDisplay()
     {
         return cardDisplay;
     }
 
-    //Returns the rairty of the card (You can rename this to get level and change the description)
+    /*Summary:
+    *      this function returns the rarity of the card
+    * 
+    * Returns:
+    *      the rairty of the card (You can rename this to get level and change the description)
+    */
     public string getRarity()
     {
         return rarity;
     }
 
-    //Gets the value of the card (This would be the base cost of the card)
+    /*Summary:
+    *      gets the value of the card for the shop to use
+    *      
+    *  Return:
+    *      the value of the card in terms of 3-D world money
+    */
     public int getValue() { return cost; } //IMPLEMENT LATER
 
-    //The card uses its ability or spell
-    public void activate() { return; }//IMPLEMENT LATER
+    /*Summary:
+     *      tells the card to do what the text of the card says it should do
+     *          and activates it
+     */
+    public void activate() { return; }//Not used for this class
 
-    //Places the tower
+    /*Summary:
+     *      returns the tower side of this card
+     * 
+     * Return:
+     *      the prefab for the tower of this object
+     *      
+     */
     public GameObject place() { return cardTower; }
 
 
