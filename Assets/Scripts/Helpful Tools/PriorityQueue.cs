@@ -2,7 +2,8 @@
  * 
  * The purpose of this function is to order any number of things in a data type
  * 
- * Also please try to avoid using the things default type because it will always be shoved to the bottom
+ * This function will not work with basic data types like ints because it uses default(T) for logic
+ *      this incompatibilty can be avoided if you dont ever add their default(T) to the priority 
  * 
  * @author Ryan Weinstein
  * 
