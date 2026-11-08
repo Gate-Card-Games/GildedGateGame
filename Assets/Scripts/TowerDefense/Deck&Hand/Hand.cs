@@ -2,7 +2,7 @@
  * 
  * @author ryan weinstein
  * 
- * collaborators n\a
+ * collaborators Matthew Zoll
  */
 using System;
 using UnityEngine;
@@ -12,10 +12,10 @@ public class Hand : MonoBehaviour
     [SerializeField] Deck deck; // the deck that will be used for calculations
     private int handSize; // the maximuim size of the hand
 
-    private int currentHandSize;
-    private ICardBase[] hand;
+    private int currentHandSize; // the current hand size
+    private ICardBase[] hand; // the hand that holds all the cards
 
-    private void Awake()
+    private void Awake() //Matt needs to add his docs to this
     {
         deck = FindAnyObjectByType<Deck>();
 
@@ -23,11 +23,19 @@ public class Hand : MonoBehaviour
     //Runs at the start of the program
     private void Start()
     {
+        //sets all the variables
         handSize = 5;
         currentHandSize = handSize;
         hand = new ICardBase[handSize];
     }
 
+    /*Summary:
+     *      This changes the hand size to a new empty array
+     *      
+     *Parameters:
+     *      newSize:
+     *          The size that you desire the hand to be at
+     */
     public void changeHandSize(int newSize)
     {
         handSize = newSize;
@@ -36,6 +44,10 @@ public class Hand : MonoBehaviour
         setHand();
     }
 
+    /*Summary:
+     *      sets the hand by drawing cards from the deck until its full
+     * 
+     */
     public void setHand()
     {
         for(int i = 0; i < handSize; i++)
@@ -45,18 +57,43 @@ public class Hand : MonoBehaviour
         
     }
 
-    //returns the size of the hand
+    /*Summary:
+     *      returns what the maximuim hand size is
+     * 
+     * Return:
+     *      what the maximuim hand size is
+     */
     public int getHandSize()
     {
         return handSize;
     }
 
+    /*Summary:
+     *      returns the card at the desired slot
+     * 
+     * Parameters:
+     *      slot:
+     *          the index of the item you want to get
+     *          
+     *Return:
+     *      The card at the desired slot
+     */
     public ICardBase getItem(int slot)
     {
         return hand[slot];
     }
 
-    //When you play a card from you hand removes and replaces it
+    /*Summary:
+     *      activates the card at the desired slot or returns what object it is if its a tower
+     *
+     *Parameters:
+     *      slot:
+     *          The index of the item that you want to play
+     *
+     *Return:
+     *      if its a defensive card a tower if not then null
+     * 
+     */
     public GameObject playCard(int slot)
     {
         if (slot >= currentHandSize)
@@ -88,7 +125,14 @@ public class Hand : MonoBehaviour
 
     }
 
-    //Remove and replace a card with a new one from the deck
+    /*Summary:
+     *      removes a card than replaces it with a new one from the deck
+     *      
+     *Parameters:
+     *      slot:
+     *          the index of the item that you want to remove
+     * 
+     */
     public void discardCard(int slot)
     {
 
