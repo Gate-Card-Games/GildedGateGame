@@ -15,4 +15,4 @@ for this playtest, we want players to interact with the shopkeeper and edit thei
 5. Did interacting with the shopkeeper feel intuitive?
 
 # Form for Testers
-https://docs.google.com/forms/d/e/1FAIpQLSfqGFauno50A6DLc9_VU7vxv37E7XglP_f1d6eN5JkQMjB8mQ/viewform?usp=publish-editor
+[Google Form](https://docs.google.com/forms/d/e/1FAIpQLSfqGFauno50A6DLc9_VU7vxv37E7XglP_f1d6eN5JkQMjB8mQ/viewform?usp=dialog)
