@@ -1,5 +1,5 @@
 # GildedGateGame
-Current build (0.01.32)
+Current build (0.02.1)
 
 -----------------------------------------------------------
 # SCOPE
