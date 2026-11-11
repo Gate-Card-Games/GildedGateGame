@@ -39,7 +39,11 @@ public class Deck : MonoBehaviour
         deckSize = 0;
         drawnCards = new HashSet<int>();
     }
-    
+    //This is for setting the card to be what every
+    public void SetDebugCard(SwordsmenCard swordCard)
+    {
+        debugCard = swordCard;
+    }
     //returns the max deck size
     public int getMaxDeckSize()
     { 

@@ -4,7 +4,8 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI textBox;
-    [SerializeField] GameObject button;
+    public GameObject sceeneUI;
+    public GameObject shopUI;
     [SerializeField] ThirdPersonCamera camera;
     [SerializeField] Movement _movement;
     [SerializeField] bool _pauseMovement;
@@ -12,12 +13,20 @@ public class LevelManager : MonoBehaviour
     public void SetMessage(string text)
     {
         textBox.SetText(text);
-        button.SetActive(true);
+        
     }
     public void FreezePlayer()
     {
         _movement.stopMovement = true;
         camera.UnFreezeMouse();
+    }
+    public void UnFreezePlayer()
+    {
+        _movement.stopMovement = false;
+        camera.FreezeMouse();
+        textBox.ClearMesh();
+        sceeneUI.SetActive(false);
+        shopUI.SetActive(false);
     }
     private static LevelManager _instance;
     public static LevelManager Instance
