@@ -1,9 +1,9 @@
 # Test
 for this playtest, we want players to interact with the shopkeeper and edit their deck. To do this the player must:
 1. Use WASD to move around in the 3d world and navigate to the shopkeeper
-2. Interact with the shopkeeper using the mouse
-3. buy a card in the shop
-4. go  to the deck editor and add their new card to the deck
+2. Interact with the shopkeeper by pressing E
+4. buy a card in the shop
+5. go  to the deck editor and add their new card to the deck
 
 # Questions
 1. What could have been explained better or earlier with the game‘s test plan document?
