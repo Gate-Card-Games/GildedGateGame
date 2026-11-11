@@ -2109,6 +2109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 222fea645ba55674a9dc8eb95ec6172c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneMenuTransition
+  needsDeck: 1
 --- !u!1 &1411571090
 GameObject:
   m_ObjectHideFlags: 0
