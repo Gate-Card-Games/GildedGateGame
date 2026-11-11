@@ -6,6 +6,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI textBox;
     public GameObject sceeneUI;
     public GameObject shopUI;
+    public Deck deck;
     [SerializeField] ThirdPersonCamera camera;
     [SerializeField] Movement _movement;
     [SerializeField] bool _pauseMovement;

@@ -481,7 +481,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Fight now
 --- !u!222 &247085642
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -785,6 +785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyNPC
   speech: Hi there welcome to the shop
+  otherSpeech: Hi there welcome to the shop
   test: 0
   m_NPC_Event:
     m_PersistentCalls:
@@ -967,6 +968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyNPC
   speech: lets fight
+  otherSpeech: Looks like you don't have any cards selected
   test: 0
   m_NPC_Event:
     m_PersistentCalls:
@@ -2076,6 +2078,7 @@ MonoBehaviour:
   textBox: {fileID: 1991694074}
   sceeneUI: {fileID: 1692357836}
   shopUI: {fileID: 1232926271}
+  deck: {fileID: 885982072}
   camera: {fileID: 1108521522}
   _movement: {fileID: 1834497235}
   _pauseMovement: 0
@@ -3391,7 +3394,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 381, y: -195}
+  m_AnchoredPosition: {x: 117, y: -29}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1989499854

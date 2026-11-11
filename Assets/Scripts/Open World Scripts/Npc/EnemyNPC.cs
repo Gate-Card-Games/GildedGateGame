@@ -6,6 +6,7 @@ public class EnemyNPC : MonoBehaviour
 {
    
     public string speech;
+    public string otherSpeech;
     public bool test;
 
     public UnityEvent m_NPC_Event;
@@ -22,6 +23,12 @@ public class EnemyNPC : MonoBehaviour
         LevelManager.Instance.SetMessage(speech);
         LevelManager.Instance.FreezePlayer();
         m_NPC_Event.Invoke();
+        if (LevelManager.Instance.deck.debugCard == null)
+        {
+            LevelManager.Instance.SetMessage(otherSpeech);
+        }
+
+       
         test = false;
     }
 }

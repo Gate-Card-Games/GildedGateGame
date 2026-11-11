@@ -25,7 +25,7 @@ public class Deck : MonoBehaviour
 
     private HashSet<int> drawnCards; //the cards that have been currently drawn
 
-    [SerializeField] SwordsmenCard debugCard;
+    public SwordsmenCard debugCard;
 
     private void Awake()
     {

@@ -4,7 +4,12 @@ public class SceneMenuTransition : MonoBehaviour
 {
     public void ChangeScene(string sceneName)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        if(LevelManager.Instance.deck.debugCard != null)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        }
+     
+       
     }
     public void QuitGame()
     {
