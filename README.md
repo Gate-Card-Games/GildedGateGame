@@ -1,6 +1,6 @@
 # GildedGateGame
 Current build (0.02.1)
-
+in this build: open world shop test, card placing test
 -----------------------------------------------------------
 # SCOPE
 
