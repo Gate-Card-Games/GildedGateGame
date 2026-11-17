@@ -7,6 +7,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class SwordsmenCard : MonoBehaviour, ICardBase, IDefensiveCard
 {
 
@@ -18,6 +19,8 @@ public class SwordsmenCard : MonoBehaviour, ICardBase, IDefensiveCard
     private const string cardName = "Swordsmen";
 
     private const string rarity = "Common";
+
+    private const int valueMult = 20;
 
 
     //Prefabs from the game
@@ -93,7 +96,10 @@ public class SwordsmenCard : MonoBehaviour, ICardBase, IDefensiveCard
     *  Return:
     *      the value of the card in terms of 3-D world money
     */
-    public int getValue() { return cost; } //IMPLEMENT LATER
+    public int getValue() 
+    {
+        return (cost * valueMult) - (int)(valueMult * Random.Range(0.01f, 0.5f)); 
+    } 
 
     /*Summary:
      *      tells the card to do what the text of the card says it should do
