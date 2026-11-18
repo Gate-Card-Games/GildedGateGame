@@ -1,13 +1,13 @@
 compiled feedback
-What could have been explained better or earlier with the game‘s test plan document?
+- What could have been explained better or earlier with the game‘s test plan document?
 players wanted to have a better explanation for the how to interact with the game's systems
-What did you feel that was interesting about the game?
+- What did you feel that was interesting about the game?
 players were interested in the battle system
-Is there anything you feel like you still don't understand about the systems in place, even after finishing the playtest?
+- Is there anything you feel like you still don't understand about the systems in place, even after finishing the playtest?
 the players were mostly confused by the deck editor
-How did you feel about the art direction?
+- How did you feel about the art direction?
 players liked the low poly style
-Did interacting with the shopkeeper feel intuitive?
+- Did interacting with the shopkeeper feel intuitive?
 players liked the shopkeeper, but want the camera to be locked during dialogue
 
 tester 1
