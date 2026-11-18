@@ -8,7 +8,7 @@ public class GridPlacer : MonoBehaviour
 {
     public GameObject boxTest;
     public Transform title;
-    public Grid grid;
+    public GridManager grid;
     public LayerMask placementLayer;
 
     [SerializeField] DislpayHand dHand;
@@ -29,9 +29,9 @@ public class GridPlacer : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, placementLayer))
         {
-            Vector3Int cellPos = grid.WorldToCell(hit.point);
+            Vector3 snappedWorldPos = grid.getCellCenter(hit.point);
 
-            Vector3 snappedWorldPos = grid.GetCellCenterWorld(cellPos);
+ 
 
             title.position = snappedWorldPos;
             if (Input.GetMouseButtonDown(0))
@@ -48,6 +48,7 @@ public class GridPlacer : MonoBehaviour
                         if (!occupiedPosition.Contains(title.position))
                         {
                             var work = Instantiate(card, title.position, Quaternion.identity);
+                            grid.placeObject(work, snappedWorldPos);
                             occupiedPosition.Add(work.transform.position);
                             dHand.removeCardOn();
                             dHand.setCardOn(-1);

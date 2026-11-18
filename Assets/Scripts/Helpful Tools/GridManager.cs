@@ -1,16 +1,188 @@
+/* This class is made to allow me to make A* and other algorithims that require a grid
+ * 
+ * @author ryan weinstein
+ * 
+ * collaborators n\a
+ * 
+ */
+
+using JetBrains.Annotations;
+using NUnit.Framework;
+using System.Collections.Generic;
+using System.Runtime.ConstrainedExecution;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private int width; //width of the grid
+
+    [SerializeField] private int height; // height of the grid
+
+    [SerializeField] private float cellSize;
+
+    [SerializeField] private Transform cellPrefab;
+
+    private GameObject[,] boxList;
+
+    private List<Transform> gridSpots;
+
+    //runs at the start of the program
+    public void Start()
     {
-        
+        loadGrid();
     }
 
-    // Update is called once per frame
-    void Update()
+    /* Summary:
+     *      creates the grid and instantates both lists
+     * 
+     * 
+     */
+    public void loadGrid()
     {
-        
+        float x = (this.transform.position.x);
+
+        float y = (this.transform.position.y);
+
+        float z = (this.transform.position.z);
+
+        boxList = new GameObject[height, width];
+
+        gridSpots = new List<Transform>();
+
+        for(int i = 0; i < height; i++)
+        {
+            float tempX = x;
+            for(int j = 0; j < width; j++)
+            {
+                var newObj = Instantiate(cellPrefab, new Vector3(tempX, y, z), this.transform.rotation, this.transform);
+                newObj.transform.localScale = new Vector3(cellSize, cellSize, cellSize);
+                tempX += cellSize;
+                gridSpots.Add(newObj);
+            }
+            z += cellSize;
+        }
     }
+
+    /*Summary:
+     *      return whats in the grid
+     * 
+     * Returns:
+     *      the objects in the grid in a 2-D array
+     */
+    public GameObject[,] getItemsInGrid()
+    {
+        return boxList;
+    }
+
+    /*Summary:
+     *      calculates and returns the postion of the spot closest to the given spot
+     *      
+     *Paramater:
+     *      pos:
+     *          the position that you want to check
+     * 
+     * Returns:
+     *      the center of the cell closest to the position
+     */
+    public Vector3 getCellCenter(Vector3 pos)
+    {
+        for(int i = 0; i < gridSpots.Count; i++)
+        {
+            //getting the other values for easier use
+            float posX = pos.x;
+            float posZ = pos.z;
+
+            //getting this obj positon
+            float thisZ = gridSpots[i].transform.position.z;
+            float thisX = gridSpots[i].transform.position.x;
+
+            float dist = cellSize / 2;
+
+            //Checks if its the square in range
+            if(posX - dist <= thisX && posX + dist >= thisX && posZ - dist <= thisZ && posZ + dist >= thisZ)
+            {
+                return gridSpots[i].transform.position;
+            }
+        }
+
+        return default; // just for a null case
+    }
+
+    /*Summary:
+     *      calculates and returns the index of the spot closest to the given spot
+     * Paramater:
+     *      pos:
+     *          the position that you want to check
+     * 
+     * Return:
+     *      the index closest to the given spot
+     */
+    private int getIndexOfPos(Vector3 pos)
+    {
+        for (int i = 0; i < gridSpots.Count; i++)
+        {
+            //getting the other values for easier use
+            float posX = pos.x;
+            float posZ = pos.z;
+
+            //getting this obj positon
+            float thisZ = gridSpots[i].transform.position.z;
+            float thisX = gridSpots[i].transform.position.x;
+
+            float dist = cellSize / 2;
+
+            //Checks if its the square in range
+            if (posX - dist <= thisX && posX + dist >= thisX && posZ - dist <= thisZ && posZ + dist >= thisZ)
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    /*Summary:
+     *      places the given object at the closest position in the grid to the given postion
+     *      
+     *Parameters:
+     *      obj:
+     *          the given object
+     *      
+     *      pos:
+     *          the given position
+     * 
+     */
+    public void placeObject(GameObject obj, Vector3 pos)
+    {
+        int index = getIndexOfPos(pos);
+
+        int x = index % width;
+
+        int y = index / width;
+
+        boxList[y, x] = obj;
+    }
+
+    /*Summary:
+     *      checks if the position in the grid currenlty has something in it
+     * 
+     * Paramter:
+     *      pos:
+     *          the given position
+     * 
+     * Return:
+     *      if the index is not null then true else its false
+     */
+    public bool isOccupied(Vector3 pos)
+    {
+
+        int index = getIndexOfPos(pos);
+
+        int x = index % width;
+
+        int y = index / width;
+
+        return !(boxList[y, x] == null);
+    }
+
 }
