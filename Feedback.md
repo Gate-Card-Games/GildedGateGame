@@ -10,6 +10,13 @@ compiled feedback
 - Did interacting with the shopkeeper feel intuitive?
  -- players liked the shopkeeper, but want the camera to be locked during dialogue
 
+themes
+onboarding - fix now 
+systems - fix now
+controls - fix later
+concept - fix later
+art - fix later
+
 tester 1
 1. I don't know where the deck editor is - onboarding
 2. The shopkeeper selling cards - systems
