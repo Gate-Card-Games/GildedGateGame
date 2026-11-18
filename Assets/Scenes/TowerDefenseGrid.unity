@@ -777,6 +777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 222fea645ba55674a9dc8eb95ec6172c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneMenuTransition
+  needsDeck: 0
 --- !u!4 &1107529405
 Transform:
   m_ObjectHideFlags: 0

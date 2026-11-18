@@ -1,3 +1,4 @@
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class ThirdPersonCamera : MonoBehaviour
@@ -7,22 +8,30 @@ public class ThirdPersonCamera : MonoBehaviour
     public Transform playerObj;
     public Transform orientation;
     public float rotationSpeed;
+    private bool frozen = false;
+    private CinemachineBrain cBrain;
 
     private void Start()
     {
+        cBrain = GetComponent<CinemachineBrain>();
         FreezeMouse();
+        
     }
     public void UnFreezeMouse()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        frozen = true;
+        cBrain.enabled = false;
     }
     public void FreezeMouse()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        frozen = false;
+        cBrain.enabled = true;
     }
-    private void Update()
+    void MovePlayer()
     {
         Vector3 viewDir = player.position - new Vector3(transform.position.x, player.position.y, transform.position.z);
         orientation.forward = viewDir.normalized;
@@ -35,6 +44,12 @@ public class ThirdPersonCamera : MonoBehaviour
             playerObj.forward = Vector3.Slerp(playerObj.forward, inputDir.normalized, Time.deltaTime * rotationSpeed);
 
         }
+    }
+    private void Update()
+    {
+        if(!frozen)
+            MovePlayer();
           
     }
+    
 }
