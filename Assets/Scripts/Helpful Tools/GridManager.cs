@@ -30,6 +30,8 @@ public class GridManager : MonoBehaviour
     public void Start()
     {
         loadGrid();
+        removeGrid();
+        loadGrid();
     }
 
     /* Summary:
@@ -48,6 +50,7 @@ public class GridManager : MonoBehaviour
         boxList = new GameObject[height, width];
 
         gridSpots = new List<Transform>();
+
 
         for(int i = 0; i < height; i++)
         {
@@ -203,11 +206,12 @@ public class GridManager : MonoBehaviour
         int x = index % width;
 
         int y = index / width;
-
-        if (x < width)
+        if (x < 0)
+            
             return false;
-
-        return !(boxList[y, x] == null);
+        else if (boxList[y , x] == default)
+            return false;
+        return true;
     }
 
     /*Summary:
@@ -253,9 +257,11 @@ public class GridManager : MonoBehaviour
         {
             for(int j = 0; j < width; j++)
             {
-                Destroy(gridSpots[j + (i * width)]);
+                Destroy(gridSpots[j + (i * width)].gameObject);
 
                 Destroy(boxList[i, j]);
+
+                boxList[i, j] = default;
             }
         }
     }
@@ -292,6 +298,45 @@ public class GridManager : MonoBehaviour
             }
         }
 
+    }
+
+    /** Summary:
+     *      returns the index's of all the neighbors
+     *      
+     *Parameter:
+     *      pos:
+     *          the position of the cell that you want to check
+     *          
+     *Return:
+     *      a list of the index's of all cells that surround it
+     */
+    public List<int> getAllNeighbors(Vector3 pos)
+    {
+        int index = getIndexOfPos(pos);
+
+        List<int> retArr = new List<int>();
+
+        if (index == -1)
+        {
+            return retArr;
+        }
+        if (index - width >= 0)
+        {
+            retArr.Add(index - width);
+        }
+        if (index + width < width * height)
+        {
+            retArr.Add(index + width);
+        }
+        if(index % width + 1 < width)
+        {
+            retArr.Add(index + 1);
+        }
+        if(index % width - 1 >= 0)
+        {
+            retArr.Add(index - 1);
+        }
+        return retArr;
     }
 
 }

@@ -1387,7 +1387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfb245545122e9344bab494ff560f23e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AStar
-  grid: {fileID: 1959506442}
+  grid: {fileID: 1959506445}
   start: {fileID: 4092340443414754027, guid: a2726280cb4a93f4a857292c9e06972f, type: 3}
   end: {fileID: 5230784132397654856, guid: 015522d112f1e3143917c51e659241c5, type: 3}
 --- !u!4 &1675953055
@@ -1686,6 +1686,7 @@ GameObject:
   - component: {fileID: 1959506443}
   - component: {fileID: 1959506442}
   - component: {fileID: 1959506444}
+  - component: {fileID: 1959506445}
   m_Layer: 0
   m_Name: GridManager
   m_TagString: Untagged
@@ -1738,10 +1739,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TrackPlacer
   boxTest: {fileID: 0}
   title: {fileID: 37172246}
-  grid: {fileID: 1959506442}
+  grid: {fileID: 1959506445}
   placementLayer:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1959506445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1959506441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feb56d220a738864183a0cdd442a7d85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GridManager
+  width: 10
+  height: 10
+  cellSize: 1
+  cellPrefab: {fileID: 4270310853473979718, guid: 2abea9cac2d7cb04ca54ddaaacbb6d4a, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

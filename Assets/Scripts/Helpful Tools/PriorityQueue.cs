@@ -85,9 +85,10 @@ public class PriorityQueue<T> where T : IComparable<T>
         elementNodes[0] = elementNodes[size - 1];
         elementNodes[size - 1] = default(T);
         int currentElement = 0;
+        size--;
         // Loops until the element is in the proper place
         continueShift(currentElement);
-        size--;
+
         return returnElement;
     }
 
@@ -180,8 +181,9 @@ public class PriorityQueue<T> where T : IComparable<T>
             {
                 elementNodes[i] = elementNodes[size - 1];
                 elementNodes[size - 1] = default(T);
-                continueShift(i); // shifts the element to its proper place
                 size--;
+                continueShift(i); // shifts the element to its proper place
+                
                 resize();
                 return true;
             }

@@ -16,7 +16,7 @@ public class PriorityQueueTester : MonoBehaviour
     void Start()
     {
         System.Random rand = new System.Random();
-        for(int i = 1; i <= 1024; i++)
+        for(int i = 1; i <= 10000; i++)
         {
             int num = rand.Next(1, 100) + 1;
             Debug.Log(num);

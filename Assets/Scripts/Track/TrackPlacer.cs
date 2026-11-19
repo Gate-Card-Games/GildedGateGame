@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class TrackPlacer : MonoBehaviour
 {
-    public GameObject boxTest;
-    public Transform title;
-    public GridManager grid;
+    private GameObject boxTest = null;
+    [SerializeField] private Transform title;
+    [SerializeField] private GridManager grid;
     public LayerMask placementLayer;
 
 

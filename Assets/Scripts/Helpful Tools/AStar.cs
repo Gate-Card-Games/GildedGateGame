@@ -1,3 +1,11 @@
+/**The Purpose of this function is to get a path from the starting object to the ending
+ * 
+ * @author ryan weinstein
+ * 
+ * Collaborators N\A
+ * 
+ */
+
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -13,6 +21,12 @@ public class AStar : MonoBehaviour
 
     [SerializeField] private GameObject end;
 
+    /**Summary:
+     *      finds where the object to start searching from is
+     * 
+     * Return:
+     *      the object to start from
+     */
     private GameObject getStart()
     {
         GameObject[,] obj = grid.getItemsInGrid();
@@ -33,6 +47,12 @@ public class AStar : MonoBehaviour
         return default;
     }
 
+    /**Summary:
+     *      finds where the object to end searching from is
+     * 
+     * Return:
+     *      the object to end at
+     */
     private GameObject getEnd()
     {
         GameObject[,] obj = grid.getItemsInGrid();
@@ -53,55 +73,55 @@ public class AStar : MonoBehaviour
         return default;
     }
 
+    /**Summary:
+     *      Returns all of the spots next to the given cell position
+     *      
+     *Parameter:
+     *      pos:
+     *          the position of the cell you want the neighbors of
+     *          
+     *Return:
+     *      the Vector3 of the spots in the grid next to the given position
+     * 
+     */
     private List<Vector3> getNeighbors(Vector3 pos)
     {
-        HashSet<Vector3> neighbors = new HashSet<Vector3>();
 
         List<Vector3> validNeighbors = new List<Vector3>();
 
-        float cellSize = grid.getCellSize();
-         //checks all of the neigbors
-        //Checks the right Cell
-        pos.x += cellSize; 
+        List<int> neighborLocs = grid.getAllNeighbors(pos);
 
-        if (grid.isOccupied(pos))
+        GameObject[,] items = grid.getItemsInGrid();
+
+        for(int i = 0; i < neighborLocs.Count; i++)
         {
-            neighbors.Add(grid.getCellCenter(pos));
-            validNeighbors.Add(grid.getCellCenter(pos));
-        }
+            int index = neighborLocs[i];
+            
+            int x = index % grid.getWidth();
 
-        //Checks The Left Cell
-        pos.x -= cellSize * 2;
+            int y = index / grid.getWidth();
 
-        if (grid.isOccupied(pos) && !neighbors.Contains(grid.getCellCenter(pos)))
-        {
-            neighbors.Add(grid.getCellCenter(pos));
-            validNeighbors.Add(grid.getCellCenter(pos));
-        }
-        
-        //Checks the cell above
-        pos.x += cellSize; //reset
+            if (isPosNull(y,x))
+            {
+                continue;
+            }
+            else
+            {
 
-        pos.y += cellSize;
-
-        if (grid.isOccupied(pos)&& !neighbors.Contains(grid.getCellCenter(pos)))
-        {
-            neighbors.Add(grid.getCellCenter(pos));
-            validNeighbors.Add(grid.getCellCenter(pos));
-        }
-
-        //Checks the cell below
-        pos.y -= cellSize * 2;
-
-        if (grid.isOccupied(pos) && !neighbors.Contains(grid.getCellCenter(pos)))
-        {
-            neighbors.Add(grid.getCellCenter(pos));
-            validNeighbors.Add(grid.getCellCenter(pos));
+                validNeighbors.Add(items[y, x].transform.position);
+            }
         }
 
         return validNeighbors;
     }
 
+    /**Summary:
+     *      Finds the shortest path from the start to the end in the grid
+     * 
+     * Return:
+     *      the shortest path in the grid from start to end
+     * 
+     */
     public List<Vector3> locate()
     {
         HashSet<Vector3> visited = new HashSet<Vector3>();
@@ -116,40 +136,47 @@ public class AStar : MonoBehaviour
 
         PriorityQueue<AStarHelper> pq = new PriorityQueue<AStarHelper>();
 
-        AStarHelper store = new AStarHelper(path, endPos);
+        AStarHelper startingPos = new AStarHelper();
 
-        visited.Add(current);
+        startingPos.setPath(path);
 
-        Debug.Log(path.Count);
+        startingPos.setEnd(endPos);
+
+
+
+        pq.add(startingPos);
+
 
 
         int maxTries = (int)(grid.getHeight() * grid.getWidth());
 
-        int tries = 0;
 
 
-        while (!(current.Equals(endPos)) && tries < maxTries)
+        for (int i = 0; i < maxTries && (endPos.x != current.x || endPos.z != current.z); i++)
         {
             AStarHelper helper = pq.poll();
-            if(!(helper == default))
+            if(helper == default(AStarHelper))
             {
-                path = helper.getPath();
+                Debug.Log("Not Possible, Found at Point: " + i);
+                break;
             }
 
-            
+            path = helper.getPath();
+
 
             current = path[path.Count - 1]; //gets the latest one added
 
+            visited.Add(current); //may be able to be removed
+
             List<Vector3> neigbors = getNeighbors(current);
 
-            Debug.Log(neigbors.Count);
 
-            foreach(Vector3 spot in neigbors)
+            for(int j = 0; j < neigbors.Count;j++) //adds the neigbors
             {
-                if (visited.Contains(spot))
+                Vector3 spot = neigbors[j];
+                if (visited.Contains(spot)) //makes sure it wasn't used before
                     continue;
 
-                Debug.Log(spot.ToString());
 
                 visited.Add(spot);
 
@@ -157,31 +184,60 @@ public class AStar : MonoBehaviour
 
                 newPath.Add(spot);
 
-                AStarHelper next = new AStarHelper(path, endPos);
+                AStarHelper next = new AStarHelper();
+
+                next.setPath(newPath);
+
+                next.setEnd(endPos);
+                
 
                 pq.add(next);
             }
-            tries++;
-            //Debug.Log(tries);
 
-        }
-        Debug.Log(maxTries);
-        if(tries >= maxTries)
-        {
-            path = new List<Vector3>();
         }
 
 
         return path;
     }
 
+    /**Summary:
+     *      just used for the button
+     * 
+     */
     public void basicFun()
     {
         List<Vector3> path = locate(); //Currently Has Bugs 
 
-        Debug.Log("Path Length: " + path.Count);
+        Debug.Log("Path Length: " + path.Count); //just tells us the length of the path it got
 
 
+    }
+
+
+
+    /**Summary:
+     *      sees if the position is null and returns if it is
+     *      
+     *Parameter:
+     *      x:
+     *          the first point in the grid or height
+     *      y:
+     *          the second point in the grid or width
+     *          
+     *Return:
+     *  true if the square is null and false if it isn't
+     * 
+     */
+    private bool isPosNull(int x, int y)
+    {
+        GameObject[,] gridArr = grid.getItemsInGrid();
+
+        if (gridArr[x , y] == default)
+        {
+            return true;
+        }
+
+        return false;
     }
 
 }
