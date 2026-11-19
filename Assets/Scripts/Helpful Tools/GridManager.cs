@@ -141,6 +141,27 @@ public class GridManager : MonoBehaviour
         return -1;
     }
 
+    /**Summary:
+     *      makes sure the object in the specified position is empty
+     * 
+     * Parameters:
+     *      x:
+     *          the x of the object
+     *      y:
+     *          the y of the object
+     *      obj:
+     *          the object you want to replace the old object
+     * 
+     */
+    private void replaceSpot(int x, int y, GameObject obj)
+    {
+        if (!(boxList[y, x] == default))
+        {
+            Destroy(boxList[y, x]);
+        }
+        boxList[y, x] = obj;
+    }
+
     /*Summary:
      *      places the given object at the closest position in the grid to the given postion
      *      
@@ -160,7 +181,8 @@ public class GridManager : MonoBehaviour
 
         int y = index / width;
 
-        boxList[y, x] = obj;
+       
+        replaceSpot(x, y, obj);
     }
 
     /*Summary:
@@ -181,6 +203,9 @@ public class GridManager : MonoBehaviour
         int x = index % width;
 
         int y = index / width;
+
+        if (x < width)
+            return false;
 
         return !(boxList[y, x] == null);
     }

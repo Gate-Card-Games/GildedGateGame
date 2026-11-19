@@ -34,18 +34,9 @@ public class TrackPlacer : MonoBehaviour
             title.position = snappedWorldPos;
             if (Input.GetMouseButtonDown(0))
             {
-
-                        if (!occupiedPosition.Contains(title.position))
-                        {
-                            var work = Instantiate(boxTest, title.position, Quaternion.identity);
-                            grid.placeObject(work, snappedWorldPos);
-                            occupiedPosition.Add(work.transform.position);
-
-                        }
-
-                
-
-
+                var work = Instantiate(boxTest, title.position, Quaternion.identity);
+                grid.placeObject(work, snappedWorldPos);
+                occupiedPosition.Add(work.transform.position);
             }
         }
 

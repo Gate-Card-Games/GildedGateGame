@@ -67,6 +67,7 @@ public class AStar : MonoBehaviour
         if (grid.isOccupied(pos))
         {
             neighbors.Add(grid.getCellCenter(pos));
+            validNeighbors.Add(grid.getCellCenter(pos));
         }
 
         //Checks The Left Cell
@@ -75,6 +76,7 @@ public class AStar : MonoBehaviour
         if (grid.isOccupied(pos) && !neighbors.Contains(grid.getCellCenter(pos)))
         {
             neighbors.Add(grid.getCellCenter(pos));
+            validNeighbors.Add(grid.getCellCenter(pos));
         }
         
         //Checks the cell above
@@ -85,6 +87,7 @@ public class AStar : MonoBehaviour
         if (grid.isOccupied(pos)&& !neighbors.Contains(grid.getCellCenter(pos)))
         {
             neighbors.Add(grid.getCellCenter(pos));
+            validNeighbors.Add(grid.getCellCenter(pos));
         }
 
         //Checks the cell below
@@ -93,6 +96,7 @@ public class AStar : MonoBehaviour
         if (grid.isOccupied(pos) && !neighbors.Contains(grid.getCellCenter(pos)))
         {
             neighbors.Add(grid.getCellCenter(pos));
+            validNeighbors.Add(grid.getCellCenter(pos));
         }
 
         return validNeighbors;
@@ -100,46 +104,68 @@ public class AStar : MonoBehaviour
 
     public List<Vector3> locate()
     {
+        HashSet<Vector3> visited = new HashSet<Vector3>();
+
         List<Vector3> path = new List<Vector3>();
 
         Vector3 current = getStart().transform.position;
 
         path.Add(current);
 
-        GameObject end = getEnd();
+        Vector3 endPos = getEnd().transform.position;
 
         PriorityQueue<AStarHelper> pq = new PriorityQueue<AStarHelper>();
 
-        AStarHelper store = new AStarHelper(path, end.transform.position);
+        AStarHelper store = new AStarHelper(path, endPos);
 
-        pq.add(store);
+        visited.Add(current);
 
-        int maxTries = (int)(Math.Pow(grid.getHeight() * grid.getWidth(),2));
+        Debug.Log(path.Count);
+
+
+        int maxTries = (int)(grid.getHeight() * grid.getWidth());
 
         int tries = 0;
 
-        while (!(current.Equals(end.transform.position)) && tries < maxTries)
+
+        while (!(current.Equals(endPos)) && tries < maxTries)
         {
-            path = pq.poll().getPath();
+            AStarHelper helper = pq.poll();
+            if(!(helper == default))
+            {
+                path = helper.getPath();
+            }
+
+            
 
             current = path[path.Count - 1]; //gets the latest one added
 
             List<Vector3> neigbors = getNeighbors(current);
 
+            Debug.Log(neigbors.Count);
+
             foreach(Vector3 spot in neigbors)
             {
+                if (visited.Contains(spot))
+                    continue;
+
+                Debug.Log(spot.ToString());
+
+                visited.Add(spot);
+
                 List<Vector3> newPath = path.ToList();
 
                 newPath.Add(spot);
 
-                AStarHelper next = new AStarHelper(path, end.transform.position);
+                AStarHelper next = new AStarHelper(path, endPos);
 
                 pq.add(next);
             }
             tries++;
+            //Debug.Log(tries);
 
-        } 
-        
+        }
+        Debug.Log(maxTries);
         if(tries >= maxTries)
         {
             path = new List<Vector3>();
@@ -151,13 +177,10 @@ public class AStar : MonoBehaviour
 
     public void basicFun()
     {
-        //List<Vector3> path = locate(); //Currently Has Bugs
+        List<Vector3> path = locate(); //Currently Has Bugs 
 
-       // Debug.Log(path);
+        Debug.Log("Path Length: " + path.Count);
 
-        Debug.Log(getEnd());
-
-        Debug.Log(getStart());
 
     }
 
