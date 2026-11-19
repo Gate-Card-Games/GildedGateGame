@@ -30,8 +30,8 @@ public class GridPlacer : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, placementLayer))
         {
             Vector3 snappedWorldPos = grid.getCellCenter(hit.point);
+            snappedWorldPos.y += grid.getCellSize() / 2;
 
- 
 
             title.position = snappedWorldPos;
             if (Input.GetMouseButtonDown(0))

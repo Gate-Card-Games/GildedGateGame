@@ -185,4 +185,88 @@ public class GridManager : MonoBehaviour
         return !(boxList[y, x] == null);
     }
 
+    /*Summary:
+     *      returns the cell size
+     *
+     *Return:
+     *  the size of the cell
+     */
+    public float getCellSize()
+    {
+        return cellSize;
+    }
+
+    /*Summary:
+     *      returns the width
+     * 
+     * Return:
+     *      the width of the grid
+     */
+    public int getWidth() 
+    { 
+        return width; 
+    }
+
+    /*Summary:
+     *      returns the height
+     * 
+     * Return:
+     *      the height of the grid
+     */
+    public int getHeight()
+    {
+        return height;
+    }
+
+    /**Summary:
+     *      deletes everything in the grid
+     * 
+     */
+    public void removeGrid()
+    {
+        for(int i = 0; i < height; i++)
+        {
+            for(int j = 0; j < width; j++)
+            {
+                Destroy(gridSpots[j + (i * width)]);
+
+                Destroy(boxList[i, j]);
+            }
+        }
+    }
+
+    /**Summary
+     *  changes the grid to the new grid provided
+     *  
+     *  Parameters:
+     *      width:
+     *          the new width of the grid
+     *      height:
+     *          the new height of the grid
+     *      gridItems:
+     *          the items you want in the grid
+     *
+     */
+    public void changeGridItems(int width, int height, GameObject[,] gridItems)
+    {
+        this.width = width;
+        this.height = height;
+        removeGrid();
+        boxList = gridItems;
+        loadGrid();
+        for(int i = 0; i < height; i++)
+        {
+            for(int j = 0; j < width; j++)
+            {
+                if (!(boxList[i,j].Equals(default)))
+                {
+                    GameObject obj = boxList[i, j];
+                    obj.transform.position = gridSpots[j + (i * width)].position;
+                    obj.transform.position = new Vector3(obj.transform.position.x, obj.transform.position.y + cellSize / 2, obj.transform.position.z);
+                }
+            }
+        }
+
+    }
+
 }

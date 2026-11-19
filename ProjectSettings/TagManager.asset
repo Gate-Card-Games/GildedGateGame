@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Card
+  - Death
+  - Start
+  - End
   layers:
   - Default
   - TransparentFX

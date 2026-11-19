@@ -1330,7 +1330,6 @@ GameObject:
   - component: {fileID: 2139329975}
   - component: {fileID: 2139329978}
   - component: {fileID: 2139329977}
-  - component: {fileID: 2139329980}
   - component: {fileID: 2139329981}
   m_Layer: 0
   m_Name: Controller
@@ -1380,20 +1379,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DislpayHand
   playerHand: {fileID: 2139329977}
---- !u!114 &2139329980
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2139329974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66845d75f87d9d44584577ef6e22bbfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FunLittlePlacerDebugger
-  grid: {fileID: 0}
-  obj: {fileID: 1360678490}
 --- !u!114 &2139329981
 MonoBehaviour:
   m_ObjectHideFlags: 0
