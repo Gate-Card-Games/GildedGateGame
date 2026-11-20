@@ -4,12 +4,19 @@
  * 
  * Collaborators N\A
  */
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BasicEnemy : MonoBehaviour, IEnemyBase
 {
+    [SerializeField] private List<Vector3> path;
+
+    [SerializeField] private NexusHealth enemyNexus;
+
     private int health = 5; //subject to change
     private float speed = 1; // subject to change
+
+    private int currentPos = 0;
 
     /*Summary:
      *  returns the current health of the enemy
@@ -47,7 +54,13 @@ public class BasicEnemy : MonoBehaviour, IEnemyBase
      */
     public float getDistToEnd()
     {
-        return 0; // Requires A* to be implemeanted
+        float sum = 0;
+        for(int i = currentPos; i < path.Count - 1; i++)
+        {
+            sum += Mathf.Sqrt(Mathf.Pow(Mathf.Abs((path[i].x - path[i+1].x)), 2) + Mathf.Pow(Mathf.Abs(path[i].z - path[i + 1].z), 2));
+        }
+
+        return sum;
     }
     /*Summary:
      *      moves the enemy along the A* path by its speed
@@ -55,6 +68,56 @@ public class BasicEnemy : MonoBehaviour, IEnemyBase
      */
     public void move()
     {
+        float thisZ = this.transform.position.z;
+
+        float thisX = this.transform.position.x;
+
+        float endPosX = path[currentPos + 1].x;
+
+        float endPosZ = path[currentPos + 1].z; //works because it destroys itself if it hits the last node and start and end are different
+
+        float totalZ = thisZ - endPosZ;
+
+        float totalX = thisX - endPosX;
+
+        float distToNextPoint =  Mathf.Abs(totalZ + totalX); //One will always be 0
+
+        if(distToNextPoint < speed)
+        {
+            this.transform.position = path[currentPos];
+            currentPos += 1;
+        }
+        else if(thisX != 0)
+        {
+            if(thisX > 0)
+            {
+                transform.position = new Vector3(transform.position.x + 1, transform.position.y, transform.position.z);
+            }
+            else
+            {
+                transform.position = new Vector3(transform.position.x - 1, transform.position.y, transform.position.z);
+            }
+        }
+        else
+        {
+            if (thisZ > 0)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+            }
+            else
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y - 1, transform.position.z);
+            }
+        }
+
+        if(currentPos >= path.Count - 1)
+        {
+            enemyNexus.changeHealth(-1 * health);
+            Destroy(this);
+        }
+
+
+
         //Need another function mainly A* to function by getting the direction
         //Ill probaly implemeant a feature to move an object by appling a force or using its transform
     }
