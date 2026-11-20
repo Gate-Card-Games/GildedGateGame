@@ -6,6 +6,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI textBox;
     public GameObject sceeneUI;
     public GameObject shopUI;
+    public GameObject deckEditorUI;
     public Deck deck;
     [SerializeField] ThirdPersonCamera camera;
     [SerializeField] Movement _movement;
@@ -28,6 +29,7 @@ public class LevelManager : MonoBehaviour
         textBox.ClearMesh();
         sceeneUI.SetActive(false);
         shopUI.SetActive(false);
+        deckEditorUI.SetActive(false);
     }
     private static LevelManager _instance;
     public static LevelManager Instance
